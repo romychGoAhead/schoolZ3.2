@@ -58,4 +58,10 @@ public class FacultyService {
 
     }
 
+    public Collection<Faculty> getByColorOrName(String color, String name) {
+        return facultyRepository.findAllByColorIgnoreCaseOrNameIgnoreCase(color, name);
+    }
+    public Faculty getByStudentId (Long studentId){
+        return facultyRepository.findByStudent_id(studentId).orElseThrow(FacultyNotFoundException::new);
+    }
 }

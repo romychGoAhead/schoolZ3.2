@@ -33,6 +33,10 @@ public class StudentService {
         return studentRepository.findAllByAge(age);
 
     }   // фильтрация по возрасту
+    public Collection<Student> findAllByAgeBetween(int min, int max) {
+        return studentRepository.findAllByAgeBetween(min, max);
+
+    }
 
     public Student create(Student student) {
         return studentRepository.save(student);
@@ -51,5 +55,6 @@ public class StudentService {
         studentRepository.delete(exsitingStudent);
         return exsitingStudent;
     }
+
 
 }

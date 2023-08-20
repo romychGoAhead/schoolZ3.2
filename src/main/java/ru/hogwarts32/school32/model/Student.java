@@ -1,9 +1,6 @@
 package ru.hogwarts32.school32.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
@@ -15,9 +12,14 @@ public class Student {
     private String name;
     private Integer age;
 
-    public Student() {  // конструктор без параметров
-    }
+    @ManyToOne  // много студентов один факультет
+    @JoinColumn(name = "faculty_id")     // какая колонка будет отвечать за эту связь
 
+    private Faculty faculty;   // добавляем факультет
+
+
+    public Student() { // конструктор без параметров
+            }
     public Student(Long id, String name, Integer age) {
         this.id = id;
         this.name = name;
@@ -48,12 +50,20 @@ public class Student {
         this.age = age;
     }
 
+    public Faculty getFaculty() {
+        return faculty;
+    }
+
+    public void setFaculty(Faculty faculty) {
+        this.faculty = faculty;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Student student = (Student) o;
-        return Objects.equals(age, student.age) && Objects.equals(id, student.id)&&
+        return Objects.equals(age, student.age) && Objects.equals(id, student.id) &&
                 Objects.equals(name, student.name);
     }
 
