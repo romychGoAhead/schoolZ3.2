@@ -25,7 +25,7 @@ public class StudentController {
         return studentService.getById(id);
     }
     @GetMapping("/filtered")
-    public Collection<Student> getByAge (@RequestParam("age") int age) {  // фильтр по возрасту
+    public Collection<Student> filtered (@RequestParam int age) {  // фильтр по возрасту
         return studentService.getByAge(age);
     }
 
@@ -43,4 +43,9 @@ public class StudentController {
     public Student remove (@PathVariable Long id) {
         return studentService.remove(id);
     }
+    @GetMapping("/by-age")
+    public Collection<Student> filtered (@RequestParam int min,@RequestParam int max) {  // фильтр по min, max
+        return studentService.findAllByAgeBetween(min,max);
+    }
+
 }

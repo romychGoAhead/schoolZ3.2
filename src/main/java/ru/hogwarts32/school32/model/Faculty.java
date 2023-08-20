@@ -1,9 +1,9 @@
 package ru.hogwarts32.school32.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import javax.persistence.*;
+import java.util.List;
 import java.util.Objects;
 @Entity
 public class Faculty {
@@ -13,6 +13,9 @@ public class Faculty {
     private String name;
     private String color;
 
+    @OneToMany (mappedBy = "faculty") //  один факультет много студентов и по какому полю связаны
+    @JsonIgnore                  // но лучше классы DTO
+    List<Student> student;
     public Faculty() {
     }
 
@@ -44,6 +47,14 @@ public class Faculty {
 
     public void setColor(String color) {
         this.color = color;
+    }
+
+    public List<Student> getStudents() {
+        return student;
+    }
+
+    public void setStudents(List<Student> students) {
+        this.student = students;
     }
 
     @Override

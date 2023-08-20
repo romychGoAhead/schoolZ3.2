@@ -44,4 +44,14 @@ public class FacultyController {
     public Faculty remove (@PathVariable Long id) {
         return facultyService.remove(id);
     }
+
+    @GetMapping("/by-search-or-name")
+    public Collection<Faculty> getByColorOrName (@RequestParam String search){ // мы передаем параметр
+        return  facultyService.getByColorOrName(search,search); // эти параметры мы передаем в оба места и в имя и цвет, т.к парамет поиска у нас и мя и цвет
+    }
+
+    @GetMapping("/by-student")
+    public Faculty getByStudent(@RequestParam Long studentId){ // передаем студента
+      return  facultyService.getByStudentId(studentId);
+    }
 }
